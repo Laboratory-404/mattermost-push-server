@@ -1,0 +1,20 @@
+[Unit]
+Description=Mattermost Push Proxy Server
+After=network.target mattermost.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mattermost-push
+Group=mattermost-push
+ExecStart=/usr/local/bin/mattermost-push-proxy -config /etc/mattermost-push-proxy/config.yaml
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+StandardOutput=append:/var/log/mattermost-push-proxy.log
+StandardError=append:/var/log/mattermost-push-proxy.log
+
+[Install]
+WantedBy=multi-user.target

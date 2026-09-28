@@ -1,0 +1,32 @@
+# Mattermost Push Proxy Server Configuration
+
+server:
+  listen_address: "0.0.0.0:8066" # Internal or local address for proxy (Mattermost connects here)
+  read_timeout: 15
+  write_timeout: 15
+  max_header_bytes: 1048576
+  enable_rate_limit: true
+  rate_limit_per_sec: 100
+  rate_limit_burst: 200
+  tls_cert_file: "" # Path to SSL certificate (leave empty if behind Nginx/Caddy reverse proxy)
+  tls_key_file: ""  # Path to SSL private key
+
+log:
+  level: "info" # debug, info, warn, error
+  format: "text"
+  log_to_file: true
+  file_path: "/var/log/mattermost-push-proxy.log"
+
+fcm:
+  enabled: true
+  credentials_file: "/etc/mattermost-push-proxy/fcm-service-account.json" # Path to FCM Service Account JSON
+  project_id: "" # Optional (auto-detected from JSON)
+  android_rn_topic: "com.mattermost.rn"
+
+apns:
+  enabled: true
+  auth_key_file: "/etc/mattermost-push-proxy/AuthKey_APNS.p8" # Path to APNs .p8 key
+  key_id: "YOUR_APNS_KEY_ID"                                  # 10-character Key ID from Apple Developer Portal
+  team_id: "YOUR_APPLE_TEAM_ID"                              # 10-character Team ID from Apple Developer Portal
+  topic: "com.mattermost.rn"                                 # App Bundle ID
+  production: true                                          # true for Production APNs, false for Sandbox

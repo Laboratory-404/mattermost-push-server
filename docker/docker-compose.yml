@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mattermost-push-proxy:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: mattermost-push-proxy
+    restart: always
+    network_mode: "host" # Allows direct 127.0.0.1 communication with Mattermost server on same host
+    volumes:
+      - /etc/mattermost-push-proxy:/etc/mattermost-push-proxy:ro
+      - /var/log/mattermost-push-proxy.log:/var/log/mattermost-push-proxy.log
+    environment:
+      - MPP_LISTEN_ADDRESS=0.0.0.0:8066
+      - MPP_LOG_LEVEL=info

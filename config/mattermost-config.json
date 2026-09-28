@@ -1,0 +1,17 @@
+{
+  "EmailSettings": {
+    "EnableEmailBatching": true
+  },
+  "NotificationLogSettings": {
+    "EnableConsole": true,
+    "ConsoleLevel": "INFO"
+  },
+  "EmailSettings": {},
+  "PushNotificationSettings": {
+    "EnablePushNotifications": true,
+    "PushNotificationServer": "http://127.0.0.1:8066",
+    "PushNotificationContents": "full",
+    "EnableFullPushNotification": true,
+    "MaxNotificationsPerChannel": 1000
+  }
+}
